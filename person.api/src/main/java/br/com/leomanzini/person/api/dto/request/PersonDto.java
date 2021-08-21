@@ -19,6 +19,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonDto {
+	
+	private Long id;
 
 	@NotEmpty
 	@Size(min = 2, max = 100)
