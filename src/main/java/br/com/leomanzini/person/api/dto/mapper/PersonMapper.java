@@ -7,12 +7,13 @@ import org.mapstruct.factory.Mappers;
 import br.com.leomanzini.person.api.dto.request.PersonDto;
 import br.com.leomanzini.person.api.entity.Person;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface PersonMapper {
 	
 	PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
 	
 	@Mapping(target = "birthDate", source = "birthDate", dateFormat = "dd-MM-yyyy")
 	Person toModel(PersonDto personDto);
+	
 	PersonDto toDto(Person person);
 }

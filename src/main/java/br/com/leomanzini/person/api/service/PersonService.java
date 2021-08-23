@@ -1,5 +1,8 @@
 package br.com.leomanzini.person.api.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +26,11 @@ public class PersonService {
 		Person savedPerson = personRepository.save(personToSave);
 
 		return MessageResponseDto.builder().message("Created person with ID: " + savedPerson.getId()).build();
+	}
+
+	public List<PersonDto> listAll() {
+		List<Person> allPeople = personRepository.findAll();
+
+		return allPeople.stream().map(personMapper::toDto).collect(Collectors.toList());
 	}
 }
