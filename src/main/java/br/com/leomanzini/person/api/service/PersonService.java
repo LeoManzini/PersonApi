@@ -1,6 +1,7 @@
 package br.com.leomanzini.person.api.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,10 @@ public class PersonService {
 		List<Person> allPeople = personRepository.findAll();
 
 		return allPeople.stream().map(personMapper::toDto).collect(Collectors.toList());
+	}
+
+	public PersonDto findById(Long id) {
+		Optional<Person> optionalPerson = personRepository.findById(id);
+		return personMapper.toDto(optionalPerson.get());
 	}
 }

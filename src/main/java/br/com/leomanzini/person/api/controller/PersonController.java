@@ -3,6 +3,7 @@ package br.com.leomanzini.person.api.controller;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,8 +36,8 @@ public class PersonController {
 		return personService.listAll();
 	}
 	
-//	@GetMapping("/{person-id}")
-//	public Optional<Person> readPersonById(@PathParam("person-id") Long personId) {
-//		return personService.findById(personId);
-//	}
+	@GetMapping("/{id}")
+	public PersonDto findById(@PathParam(value = "id") Long id) {
+		return personService.findById(id);
+	}
 }
