@@ -1,7 +1,6 @@
 package br.com.leomanzini.person.api.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import br.com.leomanzini.person.api.dto.mapper.PersonMapper;
 import br.com.leomanzini.person.api.dto.request.PersonDto;
 import br.com.leomanzini.person.api.dto.response.MessageResponseDto;
 import br.com.leomanzini.person.api.entity.Person;
+import br.com.leomanzini.person.api.exceptions.PersonNotFoundException;
 import br.com.leomanzini.person.api.repository.PersonRepository;
 
 @Service
@@ -35,8 +35,9 @@ public class PersonService {
 		return allPeople.stream().map(personMapper::toDto).collect(Collectors.toList());
 	}
 
-	public PersonDto findById(Long id) {
-		Optional<Person> optionalPerson = personRepository.findById(id);
-		return personMapper.toDto(optionalPerson.get());
+	public PersonDto findById(Long id) throws Exception {
+		Person person = personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException(id));
+
+		return personMapper.toDto(person);
 	}
 }

@@ -37,7 +37,7 @@ public class PersonController {
 	}
 	
 	@GetMapping("/{id}")
-	public PersonDto findById(@PathParam(value = "id") Long id) {
+	public PersonDto findById(@PathParam(value = "id") Long id) throws Exception {
 		return personService.findById(id);
 	}
 }
